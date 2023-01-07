@@ -1,0 +1,87 @@
+word_embeddings:
+  # Two types of word embedding algorithm (word2vec and glove) are supported.
+  # Just set the default to empty string to disable the word embeddings
+  default:  glove
+  word2vec:
+    path:  /mnt/4248075B48074CDB/ICO-2020/GloVe-ICON-2020/D50-I-30
+    dimension: 200
+    binary: true
+  glove:
+    path: /mnt/1b47d000-2aee-4aa6-92a0-ff08c97e14fc/English-Covid/dGloVe/vectors.txt  #/mnt/b7e83844-6bc7-43cd-8eee-87edc0eadf1e/glove/glove/Embedding-News-Corpus-300/vectors.txt
+    dimension: 300
+    length: 30000
+  fasttext:
+    path: /mnt/b7e83844-6bc7-43cd-8eee-87edc0eadf1e/FastText/fastText/Embedding-News-Corpus-200-300/News-embedding300.bin
+    dimension: 300
+    length: 1964000
+  
+  fasttext-gensim:
+    path: /mnt/b7e83844-6bc7-43cd-8eee-87edc0eadf1e/FastText/fastText/Embedding-News-Corpus-200-300/News-embedding200.bin
+    dimension: 200
+    length: 362781
+  
+  word2vec-gensim:
+    path: /mnt/58a96951-a863-483e-b6bd-01c265d94667/Passage-for-India/mr/300/sg/mr-d300-m2-sg.model
+    dimension: 300
+    length: 362781  
+    
+  average_g_f:
+    path: /mnt/b7e83844-6bc7-43cd-8eee-87edc0eadf1e/FastText/fastText/Embedding-News-Corpus-200-300/News-embedding300.bin
+    dimension: 300
+    length: 2000000
+  
+  concate_g_f:
+    path: /mnt/b7e83844-6bc7-43cd-8eee-87edc0eadf1e/FastText/fastText/Embedding-News-Corpus-200-300/News-embedding300.bin
+    dimension: 600
+    length: 900000  
+  
+
+
+#self-built 137664
+#sust-indis 250593
+#sefi-sust-indis 352037
+#sefi-sust-indis-18 362780
+
+datasets:
+  # Support currently 3 datasets: mrpolarity, 20newsgroup and localdata
+  default: localdata
+  mrpolarity:
+    positive_data_file:
+      path: "data/rt-polaritydata/rt-polarity.pos"
+      info: "Data source for the positive data"
+    negative_data_file:
+      path: "data/rt-polaritydata/rt-polarity.neg"
+      info: "Data source for the negative data"
+  20newsgroup:
+    # The dataset includes following 20 newsgroups:
+    # alt.atheism, comp.windows.x, rec.sport.hockey, soc.religion.christian
+    # comp.graphics, misc.forsale, sci.crypt, talk.politics.guns
+    # comp.os.ms-windows.misc, rec.autos, sci.electronics, talk.politics.mideast
+    # comp.sys.ibm.pc.hardware, rec.motorcycles, sci.med, talk.politics.misc
+    # comp.sys.mac.hardware, rec.sport.baseball, sci.space, talk.religion.misc
+    categories:
+      - alt.atheism
+      - comp.graphics
+      - sci.med
+      - soc.religion.christian
+    shuffle: True
+    random_state: 42
+  localdata:
+    # Load text files with categories as subfolder names.
+    # Individual samples are assumed to be files stored
+    # a two levels folder structure such as the following:
+    # container_folder/
+    #   category_1_folder/
+    #     file_1.txt file_2.txt ... file_42.txt
+    #   category_2_folder/
+    #     file_43.txt file_44.txt ...
+    #
+    # As an example, a SentenceCorpus dataset from
+    # https://archive.ics.uci.edu/ml/datasets/Sentence+Classification
+    # has been used. The dataset includes following 3 domains:
+    # arxiv, jdm and plos
+    container_path: /mnt/1b47d000-2aee-4aa6-92a0-ff08c97e14fc/English-Covid/Data/Pre-processed/test
+    categories:
+    shuffle: True
+    random_state: 42
+
